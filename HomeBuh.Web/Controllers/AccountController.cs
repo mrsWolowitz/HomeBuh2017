@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using HomeBuh.Web.Models;
-using HomeBuh.Web.Models.AccountViewModels;
-using HomeBuh.Web.Services;
+using HomeBuh.Models;
+using HomeBuh.Models.AccountViewModels;
+using HomeBuh.Services;
 
-namespace HomeBuh.Web.Controllers
+namespace HomeBuh.Controllers
 {
     [Authorize]
     public class AccountController : Controller

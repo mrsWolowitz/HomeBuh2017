@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using HomeBuh.Web.Models;
-using HomeBuh.Web.Models.ManageViewModels;
-using HomeBuh.Web.Services;
+using HomeBuh.Models;
+using HomeBuh.Models.ManageViewModels;
+using HomeBuh.Services;
 
-namespace HomeBuh.Web.Controllers
+namespace HomeBuh.Controllers
 {
     [Authorize]
     public class ManageController : Controller

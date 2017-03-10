@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using HomeBuh.Web.Models;
+using HomeBuh.Models;
 
-namespace HomeBuh.Web.Data
+namespace HomeBuh.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
