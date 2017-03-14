@@ -17,10 +17,10 @@ namespace HomeBuh.Data
                 return;
             }
 
-            var accounts = new Account[]
+            var accounts = new BuhAccount[]
                 {
-                    new Account{ ID = 1, Description = "Кошелек"},
-                    new Account{ ID = 2, Description = "Сберкарта"}
+                    new BuhAccount{ ID = 1, Description = "Кошелек"},
+                    new BuhAccount{ ID = 2, Description = "Сберкарта"}
                 };
 
             foreach (var account in accounts)
@@ -31,8 +31,8 @@ namespace HomeBuh.Data
 
             var entries = new Entry[]
                 {
-                    new Entry{ DateOperation = DateTime.Parse("2017-03-10"), AccountID = 1, Description = "пирожки", Value=115},
-                    new Entry{ DateOperation = DateTime.Parse("2017-03-09"), AccountID = 1, Description = "пирожки", Value=70}
+                    new Entry{ DateOperation = DateTime.Parse("2017-03-10"), BuhAccountID = 1, Description = "пирожки", Value=115},
+                    new Entry{ DateOperation = DateTime.Parse("2017-03-09"), BuhAccountID = 1, Description = "пирожки", Value=70}
                 };
 
             foreach (var entry in entries)

@@ -10,6 +10,6 @@ namespace HomeBuh.Data
         }
 
         public DbSet<Entry> Entries { get; set; }
-        public DbSet<Account> Accounts { get; set; }
+        public DbSet<BuhAccount> Accounts { get; set; }
     }
 }
