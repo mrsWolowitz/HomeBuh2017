@@ -25,7 +25,7 @@ namespace HomeBuh.Data
 
             foreach (var account in accounts)
             {
-                context.Accounts.Add(account);
+                context.BuhAccounts.Add(account);
             }
             context.SaveChanges();
 

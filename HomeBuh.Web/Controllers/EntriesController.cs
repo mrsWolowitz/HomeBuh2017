@@ -54,7 +54,7 @@ namespace HomeBuh.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,DateOperation,AccountID,Value,Description")] Entry entry)
+        public async Task<IActionResult> Create([Bind("ID,DateOperation,BuhAccountID,Value,Description")] Entry entry)
         {
             if (ModelState.IsValid)
             {

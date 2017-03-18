@@ -7,7 +7,8 @@ namespace HomeBuh.Models
         public int ID { get; set; }
         public DateTime DateOperation { get; set; }
         public int BuhAccountID { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
         public string Description { get; set; }
+        public bool Done { get; set; }
     }
 }
