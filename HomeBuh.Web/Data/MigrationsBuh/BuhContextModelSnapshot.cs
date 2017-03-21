@@ -34,11 +34,13 @@ namespace HomeBuh.Data.MigrationsBuh
 
                     b.Property<int>("BuhAccountID");
 
+                    b.Property<DateTime>("DateLastUpdate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getutcdate()");
+
                     b.Property<DateTime>("DateOperation");
 
                     b.Property<string>("Description");
-
-                    b.Property<bool>("Done");
 
                     b.Property<double>("Value");
 
@@ -47,6 +49,18 @@ namespace HomeBuh.Data.MigrationsBuh
                     b.HasIndex("BuhAccountID");
 
                     b.ToTable("Entries");
+                });
+
+            modelBuilder.Entity("HomeBuh.Models.Setting", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateProhibitionEditing");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("HomeBuh.Models.Entry", b =>

@@ -25,30 +25,6 @@ namespace HomeBuh.Controllers
             return View(await _context.Entries.ToListAsync());
         }
 
-        public IEnumerable<Entry> GetUndone()
-        {
-            var entries = _context.Entries.Where(m => m.Done == false).ToList();
-            return entries;
-        }
-
-        public bool SetDone(int? id)
-        {
-            if (id == null)
-            {
-                return false;
-            }
-            var entry = _context.Entries.SingleOrDefault(m => m.ID == id);
-            if (entry == null)
-            {
-                return false;
-            }
-            entry.Done = true;
-            _context.Entries.Update(entry);
-            int savedCount = _context.SaveChanges();
-
-            return savedCount == 1;
-        }
-
         // GET: Entries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -110,7 +86,7 @@ namespace HomeBuh.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,DateOperation,AccountID,Value,Description")] Entry entry)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,DateOperation,BuhAccountID,Value,Description,DateLastUpdate")] Entry entry)
         {
             if (id != entry.ID)
             {
