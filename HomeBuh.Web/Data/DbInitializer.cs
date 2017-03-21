@@ -40,6 +40,9 @@ namespace HomeBuh.Data
                 context.Entries.Add(entry);
             }
             context.SaveChanges();
+
+            context.Settings.Add(new Setting { DateProhibitionEditing = DateTime.Parse("2017-01-01") });
+            context.SaveChanges();
         }
     }
 }

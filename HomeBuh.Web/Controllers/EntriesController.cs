@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HomeBuh.Data;
 using HomeBuh.Models;
+using System.Globalization;
 
 namespace HomeBuh.Controllers
 {
@@ -22,7 +23,8 @@ namespace HomeBuh.Controllers
         // GET: Entries
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Entries.ToListAsync());
+            ViewData["Message"] = _context.Settings.FirstOrDefault().DateProhibitionEditing.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            return View(await _context.Entries.OrderByDescending(x=>x.DateOperation).ToListAsync());
         }
 
         // GET: Entries/Details/5
@@ -58,6 +60,9 @@ namespace HomeBuh.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (entry.DateOperation.ToUniversalTime() < _context.Settings.FirstOrDefault().DateProhibitionEditing)
+                    return View(entry);
+
                 _context.Add(entry);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -72,12 +77,16 @@ namespace HomeBuh.Controllers
             {
                 return NotFound();
             }
-
+            
             var entry = await _context.Entries.SingleOrDefaultAsync(m => m.ID == id);
             if (entry == null)
             {
                 return NotFound();
             }
+
+            if (entry.DateOperation.ToUniversalTime() < _context.Settings.FirstOrDefault().DateProhibitionEditing)
+                return NotFound();
+            
             return View(entry);
         }
 
@@ -86,12 +95,15 @@ namespace HomeBuh.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,DateOperation,BuhAccountID,Value,Description,DateLastUpdate")] Entry entry)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,DateOperation,BuhAccountID,Value,Description")] Entry entry)
         {
             if (id != entry.ID)
             {
                 return NotFound();
             }
+
+            if (entry.DateOperation.ToUniversalTime() < _context.Settings.FirstOrDefault().DateProhibitionEditing)
+                return View(entry);
 
             if (ModelState.IsValid)
             {
