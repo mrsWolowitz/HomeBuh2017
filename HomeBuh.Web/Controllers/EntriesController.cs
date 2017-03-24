@@ -27,6 +27,36 @@ namespace HomeBuh.Controllers
             return View(await _context.Entries.OrderByDescending(x=>x.DateOperation).ToListAsync());
         }
 
+        public IEnumerable<Entry> GetByPeriod(DateTime DateBegin, DateTime DateEnd)
+        {
+            var entries = _context.Entries.Where(x => x.DateLastUpdate >= DateBegin && x.DateLastUpdate < DateEnd).ToList();
+            return entries;
+        }
+
+        public bool SetProhibitionEditing(DateTime date)
+        {
+            var entry = _context.Settings.FirstOrDefault();
+            entry.DateProhibitionEditing = date;
+
+            try
+            {
+                _context.Settings.Update(entry);
+                _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EntryExists(entry.ID))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return true;
+        }
+
         // GET: Entries/Details/5
         public async Task<IActionResult> Details(int? id)
         {

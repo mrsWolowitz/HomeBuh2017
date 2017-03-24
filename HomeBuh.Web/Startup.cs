@@ -79,6 +79,10 @@ namespace HomeBuh.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "period",
+                    template: "{controller=Home}/{action=GetByPeriod}/{DateBegin:DateTime}/{DateEnd:DateTime}");
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
